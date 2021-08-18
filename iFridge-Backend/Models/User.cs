@@ -1,4 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System;
+using System.Collections.Generic;
+
 
 namespace iFridge_Backend.Models
 {
@@ -14,5 +17,9 @@ namespace iFridge_Backend.Models
         public string GitHub { get; set; }
 
         public string ImageURI { get; set; }
+
+        public ICollection<Fridge> Fridges { get; set; } = new List<Fridge>();
+
+
     }
 }
