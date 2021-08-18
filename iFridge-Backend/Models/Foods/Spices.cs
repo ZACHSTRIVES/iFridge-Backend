@@ -12,6 +12,9 @@ namespace iFridge_Backend.Models.Foods
         public int FridgeID { get; set; }
 
         [Required]
+        public Fridge Fridge { get; set; }
+
+        [Required]
         public int OriginQTY { get; set; }
 
         [Required]

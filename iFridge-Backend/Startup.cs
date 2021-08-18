@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 
 namespace iFridge_Backend
 {
@@ -27,7 +26,7 @@ namespace iFridge_Backend
             services.AddGraphQLServer()
                 .AddQueryType(d => d.Name("Query"))
                 .AddTypeExtension<UserQueries>();
-          
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

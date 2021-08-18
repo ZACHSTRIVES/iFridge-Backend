@@ -1,15 +1,18 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace iFridge_Backend.Models.Bread
+namespace iFridge_Backend.Models.Foods
 {
-    public class Fruits
+    public class Bread
     {
         [Key]
         public int Id { get; set; }
 
         [Required]
         public int FridgeID { get; set; }
+
+        [Required]
+        public Fridge Fridge { get; set; }
 
         [Required]
         public int OriginQTY { get; set; }

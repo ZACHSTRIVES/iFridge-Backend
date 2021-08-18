@@ -1,6 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 
 namespace iFridge_Backend.Models
@@ -18,7 +17,7 @@ namespace iFridge_Backend.Models
 
         public string ImageURI { get; set; }
 
-        public ICollection<Fridge> Fridges { get; set; } = new List<Fridge>();
+        public ICollection<UserFridge> UserFridges{ get; set; } = new List<UserFridge>();
 
 
     }
