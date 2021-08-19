@@ -19,7 +19,7 @@ namespace iFridge_Backend.Models
 
         public DateTime Created { get; set; }
 
-        public ICollection<User> Users { get; set; } = new List<User>();
+        public ICollection<UserFridge> UserFridges { get; set; } = new List<UserFridge>();
 
         public ICollection<Bread> Breads { get; set; } = new List<Bread>();
 
@@ -34,7 +34,6 @@ namespace iFridge_Backend.Models
         public ICollection<Spices> Spicess { get; set; } = new List<Spices>();
 
         public ICollection<Vegetable> Vegetables { get; set; } = new List<Vegetable>();
-        public ICollection<UserFridge> UserFridges { get; set; } = new List<UserFridge>();
 
 
     }

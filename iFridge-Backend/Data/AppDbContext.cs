@@ -68,11 +68,6 @@ namespace iFridge_Backend.Data
                .HasOne(b => b.Fridge)
                .WithMany(f => f.Vegetables)
                .HasForeignKey(b => b.FridgeID);
-
-
-
-
-
         }
 
     }
