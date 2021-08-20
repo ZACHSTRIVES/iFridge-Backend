@@ -1,4 +1,6 @@
 using iFridge_Backend.Data;
+using iFridge_Backend.GraphQL.Fridges;
+using iFridge_Backend.GraphQL.UserFridges;
 using iFridge_Backend.GraphQL.Users;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -23,9 +25,15 @@ namespace iFridge_Backend
         {
 
             services.AddPooledDbContextFactory<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddGraphQLServer()
+            services
+                .AddGraphQLServer()
                 .AddQueryType(d => d.Name("Query"))
-                .AddTypeExtension<UserQueries>();
+                     .AddTypeExtension<UserQueries>()
+                     .AddTypeExtension<FridgeQueries>()
+                     .AddTypeExtension<UserFridgeQueries>()
+                .AddType<UserType>()
+                .AddType<FridgeType>()
+                .AddType<UserFridgeType>();
 
         }
 

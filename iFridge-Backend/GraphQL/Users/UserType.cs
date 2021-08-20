@@ -7,6 +7,7 @@ using HotChocolate;
 using HotChocolate.Types;
 using iFridge_Backend.Models;
 using iFridge_Backend.Data;
+using iFridge_Backend.GraphQL.UserFridges;
 
 namespace iFridge_Backend.GraphQL.Users
 {
