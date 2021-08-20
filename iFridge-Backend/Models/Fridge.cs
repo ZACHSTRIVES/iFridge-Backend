@@ -1,4 +1,4 @@
-﻿using iFridge_Backend.Models.Foods;
+﻿
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -21,19 +21,9 @@ namespace iFridge_Backend.Models
 
         public ICollection<UserFridge> UserFridges { get; set; } = new List<UserFridge>();
 
-        public ICollection<Bread> Breads { get; set; } = new List<Bread>();
+        public ICollection<Food> Foods { get; set; } = new List<Food>();
 
-        public ICollection<Fruit> Fruits { get; set; } = new List<Fruit>();
-
-        public ICollection<Milk> Milks { get; set; } = new List<Milk>();
-
-        public ICollection<Other> Others { get; set; } = new List<Other>();
-
-        public ICollection<Seafood> Seafoods { get; set; } = new List<Seafood>();
-
-        public ICollection<Spices> Spicess { get; set; } = new List<Spices>();
-
-        public ICollection<Vegetable> Vegetables { get; set; } = new List<Vegetable>();
+       
 
 
     }

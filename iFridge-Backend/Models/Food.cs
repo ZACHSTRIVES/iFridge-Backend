@@ -1,16 +1,16 @@
 ﻿using System;
+
 using System.ComponentModel.DataAnnotations;
 
-namespace iFridge_Backend.Models.Foods
+namespace iFridge_Backend.Models
 {
-    public class Spices
+    public class Food
     {
         [Key]
         public int Id { get; set; }
 
         [Required]
         public int FridgeID { get; set; }
-
         [Required]
         public Fridge Fridge { get; set; }
 
@@ -25,12 +25,10 @@ namespace iFridge_Backend.Models.Foods
 
         [Required]
         public DateTime ExpireDate { get; set; }
-
         public string Notes { get; set; }
 
         public DateTime Modified { get; set; }
 
         public DateTime Created { get; set; }
-
     }
 }

@@ -33,6 +33,7 @@ namespace iFridge_Backend
                      .AddTypeExtension<UserFridgeQueries>()
                 .AddMutationType(d => d.Name("Mutation"))
                      .AddTypeExtension<UserMutations>()
+                     .AddTypeExtension<FridgeMutations>()
                 .AddType<UserType>()
                 .AddType<FridgeType>()
                 .AddType<UserFridgeType>();
