@@ -8,6 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="GraphQL\Users\新文件夹\**" />
+    <Compile Remove="GraphQL\新文件夹1\**" />
+    <Content Remove="GraphQL\Users\新文件夹\**" />
+    <Content Remove="GraphQL\新文件夹1\**" />
+    <EmbeddedResource Remove="GraphQL\Users\新文件夹\**" />
+    <EmbeddedResource Remove="GraphQL\新文件夹1\**" />
+    <None Remove="GraphQL\Users\新文件夹\**" />
+    <None Remove="GraphQL\新文件夹1\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="HotChocolate.AspNetCore" Version="11.3.4" />
     <PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="11.3.4" />
     <PackageReference Include="HotChocolate.Data" Version="11.3.4" />

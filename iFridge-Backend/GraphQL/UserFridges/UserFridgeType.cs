@@ -30,8 +30,6 @@ namespace iFridge_Backend.GraphQL.UserFridges
                 .ResolveWith<Resolvers>(r => r.GetFridge(default!, default!, default))
                 .UseDbContext<AppDbContext>()
                 .Type<NonNullType<FridgeType>>();
-
-
         }
 
         private class Resolvers

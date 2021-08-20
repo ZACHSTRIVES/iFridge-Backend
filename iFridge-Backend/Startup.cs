@@ -1,4 +1,5 @@
 using iFridge_Backend.Data;
+using iFridge_Backend.GraphQL.Foods;
 using iFridge_Backend.GraphQL.Fridges;
 using iFridge_Backend.GraphQL.UserFridges;
 using iFridge_Backend.GraphQL.Users;
@@ -31,10 +32,12 @@ namespace iFridge_Backend
                      .AddTypeExtension<UserQueries>()
                      .AddTypeExtension<FridgeQueries>()
                      .AddTypeExtension<UserFridgeQueries>()
+                     .AddTypeExtension<FoodQueries>()
                 .AddMutationType(d => d.Name("Mutation"))
                      .AddTypeExtension<UserMutations>()
                      .AddTypeExtension<FridgeMutations>()
                      .AddTypeExtension<UserFridgeMutations>()
+                     .AddTypeExtension<FoodMutations>()
                 .AddType<UserType>()
                 .AddType<FridgeType>()
                 .AddType<UserFridgeType>();
