@@ -12,13 +12,13 @@ namespace iFridge_Backend.GraphQL.UserFridges
     {
         [UseAppDbContext]
         [UsePaging]
-        public IQueryable<UserFridge> GetUserFrdiges([ScopedService] AppDbContext context)
+        public IQueryable<UserFridge> GetUserFridges([ScopedService] AppDbContext context)
         {
             return context.UserFridges.OrderBy(c => c.UserId);
         }
 
         [UseAppDbContext]
-        public UserFridge GetUserFrdiges(int id, [ScopedService] AppDbContext context)
+        public UserFridge GetUserFridges(int id, [ScopedService] AppDbContext context)
         {
             return context.UserFridges.Find(id);
         }
