@@ -1,6 +1,6 @@
-﻿using iFridge_Backend.Data;
-using HotChocolate.Types;
+﻿using HotChocolate.Types;
 using HotChocolate.Types.Descriptors;
+using iFridge_Backend.Data;
 using System.Reflection;
 
 namespace iFridge_Backend.Extensions

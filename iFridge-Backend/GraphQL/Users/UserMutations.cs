@@ -1,16 +1,16 @@
-﻿using System;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using HotChocolate;
+﻿using HotChocolate;
 using HotChocolate.AspNetCore;
 using HotChocolate.Types;
 using iFridge_Backend.Data;
 using iFridge_Backend.Extensions;
-using iFridge_Backend.Models;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Octokit;
+using System;
+using System.Collections.Generic;
+using System.Security.Claims;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace iFridge_Backend.GraphQL.Users
 {
@@ -56,7 +56,7 @@ namespace iFridge_Backend.GraphQL.Users
         {
             var client = new GitHubClient(new ProductHeaderValue("iFridge"));
 
-            var request = new OauthTokenRequest("sss", "sss", input.Code);
+            var request = new OauthTokenRequest(Startup.Configuration["Github:ClientId"], Startup.Configuration["Github:ClientSecret"], input.Code);
             var tokenInfo = await client.Oauth.CreateAccessToken(request);
 
             if (tokenInfo.AccessToken == null)
@@ -66,6 +66,46 @@ namespace iFridge_Backend.GraphQL.Users
                     .SetCode("AUTH_NOT_AUTHENTICATED")
                     .Build());
             }
+
+            client.Credentials = new Credentials(tokenInfo.AccessToken);
+            var user = await client.User.Current();
+
+            var u = await context.Users.FirstOrDefaultAsync(s => s.GitHub == user.Login, cancellationToken);
+
+            if (u == null)
+            {
+                u = new Models.User
+                {
+                    Name = user.Name ?? user.Login,
+                    GitHub = user.Login,
+                    ImageURI = user.AvatarUrl,
+                };
+
+                context.Users.Add(u);
+                await context.SaveChangesAsync(cancellationToken);
+            }
+
+            // authentication successful so generate jwt token
+            var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Startup.Configuration["JWT:Secret"]));
+            var credentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
+
+            var claims = new List<Claim>{
+                new Claim( "studentId", u.Id.ToString()),
+            };
+
+            var jwtToken = new JwtSecurityToken(
+                "MSA-Yearbook",
+                "MSA-Student",
+                claims,
+                expires: DateTime.Now.AddDays(90),
+                signingCredentials: credentials);
+
+            string token = new JwtSecurityTokenHandler().WriteToken(jwtToken);
+
+            return new LoginPayload(student, token);
+
+
+
 
 
         }

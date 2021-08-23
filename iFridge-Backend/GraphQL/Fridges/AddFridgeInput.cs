@@ -10,5 +10,5 @@ namespace iFridge_Backend.GraphQL.Fridges
 
         );
 
-    
+
 }

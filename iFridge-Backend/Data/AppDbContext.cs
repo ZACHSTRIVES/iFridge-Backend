@@ -11,7 +11,7 @@ namespace iFridge_Backend.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Fridge> Fridges { get; set; }
         public DbSet<Food> Foods { get; set; }
-     
+
         public DbSet<UserFridge> UserFridges { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -34,7 +34,7 @@ namespace iFridge_Backend.Data
                 .WithMany(f => f.Foods)
                 .HasForeignKey(b => b.FridgeID);
 
-           
+
         }
 
     }
