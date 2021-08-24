@@ -11,6 +11,8 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace iFridge_Backend.GraphQL.Users
 {
@@ -55,6 +57,7 @@ namespace iFridge_Backend.GraphQL.Users
         public async Task<LoginPayload> LoginAsync(LoginInput input, [ScopedService] AppDbContext context, CancellationToken cancellationToken)
         {
             var client = new GitHubClient(new ProductHeaderValue("iFridge"));
+            Console.WriteLine(input.Code);
 
             var request = new OauthTokenRequest(Startup.Configuration["Github:ClientId"], Startup.Configuration["Github:ClientSecret"], input.Code);
             var tokenInfo = await client.Oauth.CreateAccessToken(request);
@@ -90,19 +93,19 @@ namespace iFridge_Backend.GraphQL.Users
             var credentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
 
             var claims = new List<Claim>{
-                new Claim( "studentId", u.Id.ToString()),
+                new Claim( "userId", u.Id.ToString()),
             };
 
             var jwtToken = new JwtSecurityToken(
-                "MSA-Yearbook",
-                "MSA-Student",
+                "iFridge",
+                "iFridge-User",
                 claims,
                 expires: DateTime.Now.AddDays(90),
                 signingCredentials: credentials);
 
             string token = new JwtSecurityTokenHandler().WriteToken(jwtToken);
 
-            return new LoginPayload(student, token);
+            return new LoginPayload(u, token);
 
 
 

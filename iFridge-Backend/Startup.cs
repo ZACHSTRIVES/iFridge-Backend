@@ -31,6 +31,7 @@ namespace iFridge_Backend
             services.AddPooledDbContextFactory<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services
                 .AddGraphQLServer()
+                .AddAuthorization()
                 .AddQueryType(d => d.Name("Query"))
                      .AddTypeExtension<UserQueries>()
                      .AddTypeExtension<FridgeQueries>()
