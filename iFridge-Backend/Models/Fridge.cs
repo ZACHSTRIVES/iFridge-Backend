@@ -23,7 +23,7 @@ namespace iFridge_Backend.Models
 
         public ICollection<Food> Foods { get; set; } = new List<Food>();
 
-       
+
 
 
     }

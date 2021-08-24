@@ -17,7 +17,7 @@ namespace iFridge_Backend.Models
 
         public string ImageURI { get; set; }
 
-        public ICollection<UserFridge> UserFridges{ get; set; } = new List<UserFridge>();
+        public ICollection<UserFridge> UserFridges { get; set; } = new List<UserFridge>();
 
 
     }

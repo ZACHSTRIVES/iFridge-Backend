@@ -3,12 +3,15 @@ using iFridge_Backend.GraphQL.Foods;
 using iFridge_Backend.GraphQL.Fridges;
 using iFridge_Backend.GraphQL.UserFridges;
 using iFridge_Backend.GraphQL.Users;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace iFridge_Backend
 {
@@ -19,7 +22,7 @@ namespace iFridge_Backend
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        public static IConfiguration Configuration { get; private set; } = default!;
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -28,6 +31,7 @@ namespace iFridge_Backend
             services.AddPooledDbContextFactory<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services
                 .AddGraphQLServer()
+                .AddAuthorization()
                 .AddQueryType(d => d.Name("Query"))
                      .AddTypeExtension<UserQueries>()
                      .AddTypeExtension<FridgeQueries>()
@@ -41,6 +45,22 @@ namespace iFridge_Backend
                 .AddType<UserType>()
                 .AddType<FridgeType>()
                 .AddType<UserFridgeType>();
+            var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Secret"]));
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters =
+                        new TokenValidationParameters
+                        {
+                            ValidIssuer = "MSA-Yearbook",
+                            ValidAudience = "MSA-Student",
+                            ValidateIssuerSigningKey = true,
+                            IssuerSigningKey = signingKey
+                        };
+                });
+
+            services.AddAuthorization();
 
         }
 
@@ -53,11 +73,14 @@ namespace iFridge_Backend
             }
 
             app.UseRouting();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGraphQL();
             });
         }
+
+
     }
 }

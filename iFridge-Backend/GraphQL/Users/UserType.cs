@@ -1,17 +1,17 @@
-﻿using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using HotChocolate;
+﻿using HotChocolate;
 using HotChocolate.Types;
-using iFridge_Backend.Models;
 using iFridge_Backend.Data;
 using iFridge_Backend.GraphQL.UserFridges;
+using iFridge_Backend.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace iFridge_Backend.GraphQL.Users
 {
-    public class UserType: ObjectType<User>
+    public class UserType : ObjectType<User>
     {
         protected override void Configure(IObjectTypeDescriptor<User> descriptor)
         {
@@ -26,7 +26,7 @@ namespace iFridge_Backend.GraphQL.Users
                 .UseDbContext<AppDbContext>()
                 .Type<NonNullType<ListType<NonNullType<UserFridgeType>>>>();
 
-           
+
         }
 
         private class Resolvers
@@ -37,7 +37,7 @@ namespace iFridge_Backend.GraphQL.Users
                 return await context.UserFridges.Where(u => u.UserId == user.Id).ToArrayAsync(cancellationToken);
             }
 
-           
+
         }
     }
 }

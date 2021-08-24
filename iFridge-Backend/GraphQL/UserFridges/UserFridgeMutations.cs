@@ -19,7 +19,7 @@ namespace iFridge_Backend.GraphQL.UserFridges
             {
                 UserId = int.Parse(input.UserId),
                 FridgeId = int.Parse(input.FridgeId)
-               
+
             };
             context.UserFridges.Add(userFridge);
 

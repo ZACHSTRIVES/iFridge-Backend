@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using HotChocolate.Types;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using HotChocolate.Types;
 
 namespace iFridge_Backend.Extensions
 {

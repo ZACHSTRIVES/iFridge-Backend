@@ -1,9 +1,9 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using HotChocolate;
+﻿using HotChocolate;
 using HotChocolate.Types;
-using iFridge_Backend.Models;
 using iFridge_Backend.Data;
+using iFridge_Backend.Models;
+using System.Threading;
+using System.Threading.Tasks;
 
 
 namespace iFridge_Backend.GraphQL.Foods
@@ -21,7 +21,7 @@ namespace iFridge_Backend.GraphQL.Foods
                 .ResolveWith<Resolvers>(r => r.GetFridge(default!, default!, default))
                 .UseDbContext<AppDbContext>()
                 .Type<NonNullType<FoodType>>();
-       
+
         }
 
         private class Resolvers

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using HotChocolate;
+﻿using HotChocolate;
 using HotChocolate.Types;
 using iFridge_Backend.Data;
 using iFridge_Backend.Extensions;
 using iFridge_Backend.Models;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace iFridge_Backend.GraphQL.Foods
 {
@@ -17,7 +17,7 @@ namespace iFridge_Backend.GraphQL.Foods
           [ScopedService] AppDbContext context, CancellationToken cancellationToken)
         {
             var food = new Food
-            { 
+            {
 
                 OriginQTY = int.Parse(input.OriginQTY),
                 CurrentQTY = int.Parse(input.CurrentQTY),
