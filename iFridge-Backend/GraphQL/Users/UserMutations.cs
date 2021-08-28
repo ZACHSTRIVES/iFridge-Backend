@@ -57,7 +57,6 @@ namespace iFridge_Backend.GraphQL.Users
         public async Task<LoginPayload> LoginAsync(LoginInput input, [ScopedService] AppDbContext context, CancellationToken cancellationToken)
         {
             var client = new GitHubClient(new ProductHeaderValue("iFridge"));
-            Console.WriteLine(input.Code);
 
             var request = new OauthTokenRequest(Startup.Configuration["Github:ClientId"], Startup.Configuration["Github:ClientSecret"], input.Code);
             var tokenInfo = await client.Oauth.CreateAccessToken(request);
@@ -98,7 +97,7 @@ namespace iFridge_Backend.GraphQL.Users
 
             var jwtToken = new JwtSecurityToken(
                 "iFridge",
-                "iFridge-User",
+                "iFridge",
                 claims,
                 expires: DateTime.Now.AddDays(90),
                 signingCredentials: credentials);

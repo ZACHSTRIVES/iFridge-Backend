@@ -8,7 +8,7 @@ using System.Security.Claims;
 using HotChocolate.AspNetCore;
 using HotChocolate.AspNetCore.Authorization;
 using System.ComponentModel.DataAnnotations;
-
+using System;
 
 namespace iFridge_Backend.GraphQL.Users
 {
@@ -32,7 +32,7 @@ namespace iFridge_Backend.GraphQL.Users
         public User GetSelf(ClaimsPrincipal claimsPrincipal, [ScopedService] AppDbContext context)
         {
             var userIdStr = claimsPrincipal.Claims.First(c => c.Type == "userId").Value;
-
+            
             return context.Users.Find(int.Parse(userIdStr));
         }
 
