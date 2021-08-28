@@ -11,14 +11,13 @@ namespace iFridge_Backend.GraphQL.Foods
     public class FoodQueries
     {
         [UseAppDbContext]
-        [UsePaging]
         public IQueryable<Food> GetFoods([ScopedService] AppDbContext context)
         {
             return context.Foods.OrderBy(c => c.Created);
         }
 
         [UseAppDbContext]
-        public Food GetFoods(int id, [ScopedService] AppDbContext context)
+        public Food GetFood(int id, [ScopedService] AppDbContext context)
         {
             return context.Foods.Find(id);
         }

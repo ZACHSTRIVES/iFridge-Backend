@@ -18,9 +18,10 @@ namespace iFridge_Backend.GraphQL.Foods
         {
             var food = new Food
             {
-
+                FridgeID = int.Parse(input.FridgeID),
                 OriginQTY = int.Parse(input.OriginQTY),
                 CurrentQTY = int.Parse(input.CurrentQTY),
+                Notes = input.Notes,
                 Type = input.Type,
                 ExpireDate = input.ExpireDate,
                 Modified = DateTime.Now,
