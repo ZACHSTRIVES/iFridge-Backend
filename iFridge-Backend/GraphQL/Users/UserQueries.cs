@@ -16,7 +16,6 @@ namespace iFridge_Backend.GraphQL.Users
     public class UserQueries
     {
         [UseAppDbContext]
-        [UsePaging]
         public IQueryable<User> GetUsers([ScopedService] AppDbContext context)
         {
             return context.Users;
