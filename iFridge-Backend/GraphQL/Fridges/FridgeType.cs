@@ -27,6 +27,12 @@ namespace iFridge_Backend.GraphQL.Users
                 .UseDbContext<AppDbContext>()
                 .Type<NonNullType<ListType<NonNullType<UserFridgeType>>>>();
 
+            descriptor
+                 .Field(f => f.Foods)
+                 .ResolveWith<Resolvers>(r => r.GetFoods(default!, default!, default))
+                 .UseDbContext<AppDbContext>()
+                 .Type<NonNullType<ListType<NonNullType<Foods.FoodType>>>>();
+
 
         }
 
@@ -36,6 +42,12 @@ namespace iFridge_Backend.GraphQL.Users
                 CancellationToken cancellationToken)
             {
                 return await context.UserFridges.Where(uf => uf.FridgeId == fridge.Id).ToArrayAsync(cancellationToken);
+            }
+
+            public async Task<IEnumerable<Food>> GetFoods(Fridge fridge, [ScopedService] AppDbContext context,
+                CancellationToken cancellationToken)
+            {
+                return await context.Foods.Where(f => f.FridgeID == fridge.Id).ToArrayAsync(cancellationToken);
             }
 
 

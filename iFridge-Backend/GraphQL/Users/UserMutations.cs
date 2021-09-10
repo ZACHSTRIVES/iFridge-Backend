@@ -60,6 +60,7 @@ namespace iFridge_Backend.GraphQL.Users
 
             var request = new OauthTokenRequest(Startup.Configuration["Github:ClientId"], Startup.Configuration["Github:ClientSecret"], input.Code);
             var tokenInfo = await client.Oauth.CreateAccessToken(request);
+          
 
             if (tokenInfo.AccessToken == null)
             {
@@ -103,6 +104,7 @@ namespace iFridge_Backend.GraphQL.Users
                 signingCredentials: credentials);
 
             string token = new JwtSecurityTokenHandler().WriteToken(jwtToken);
+            Console.WriteLine(token);
 
             return new LoginPayload(u, token);
 

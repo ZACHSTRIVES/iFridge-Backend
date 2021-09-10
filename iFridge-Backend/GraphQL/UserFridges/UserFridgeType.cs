@@ -39,7 +39,7 @@ namespace iFridge_Backend.GraphQL.UserFridges
             public async Task<Fridge> GetFridge(UserFridge userFridge, [ScopedService] AppDbContext context,
                 CancellationToken cancellationToken)
             {
-                return await context.Fridges.FindAsync(new object[] { userFridge.UserId }, cancellationToken);
+                return await context.Fridges.FindAsync(new object[] { userFridge.FridgeId }, cancellationToken);
             }
 
 
