@@ -14,8 +14,6 @@ namespace iFridge_Backend.GraphQL.UserFridges
         {
             descriptor.Field(uf => uf.UserId).Type<NonNullType<IdType>>();
             descriptor.Field(uf => uf.FridgeId).Type<NonNullType<IdType>>();
-
-
             descriptor
                 .Field(uf => uf.User)
                 .ResolveWith<Resolvers>(r => r.GetUser(default!, default!, default))
@@ -41,8 +39,6 @@ namespace iFridge_Backend.GraphQL.UserFridges
             {
                 return await context.Fridges.FindAsync(new object[] { userFridge.FridgeId }, cancellationToken);
             }
-
-
         }
 
     }

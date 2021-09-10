@@ -43,5 +43,18 @@ namespace iFridge_Backend.GraphQL.Fridges
 
             return fridge;
         }
+
+        [UseAppDbContext]
+        public async Task<Fridge> DeleteFridgeAsync(DeleteFridgeInput input,
+            [ScopedService] AppDbContext context, CancellationToken cancellationToken)
+        {
+            var fridge = await context.Fridges.FindAsync(int.Parse(input.FridgeId));
+      
+            context.Remove(fridge);
+            context.SaveChanges();
+
+            return fridge;
+
+        }
     }
 }
