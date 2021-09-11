@@ -40,5 +40,16 @@ namespace iFridge_Backend.GraphQL.UserFridges
             return context.UserFridges.Where(u => u.FridgeId == int.Parse(input.FridgeId));
 
         }
+
+        [UseAppDbContext]
+        public Task<IQueryable<UserFridge>> RemoveFridgemateAsync(RemoveFridgemateInput input,
+         [ScopedService] AppDbContext context, CancellationToken cancellationToken)
+        {
+            context.RemoveRange(context.UserFridges.Where(u => (u.FridgeId == int.Parse(input.FridgeId)&&(u.UserId==int.Parse(input.UserId)))));
+            context.SaveChanges();
+
+            return Task.FromResult(context.UserFridges.Where(u => u.FridgeId == int.Parse(input.FridgeId)));
+
+        }
     }
 }
