@@ -12,9 +12,9 @@ namespace iFridge_Backend.GraphQL.UserFridges
     {
         
         [UseAppDbContext]
-        public IQueryable<UserFridge> GetUserFridges(int id, [ScopedService] AppDbContext context)
+        public IQueryable<UserFridge> GetUserFridges(QueryUserFridgeInput input, [ScopedService] AppDbContext context)
         {
-            return context.UserFridges.Where(uf => uf.UserId == id);
+            return context.UserFridges.Where(uf => uf.UserId == int.Parse(input.UserId));
         }
     }
 }
