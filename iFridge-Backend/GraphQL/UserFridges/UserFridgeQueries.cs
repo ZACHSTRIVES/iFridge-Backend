@@ -16,5 +16,15 @@ namespace iFridge_Backend.GraphQL.UserFridges
         {
             return context.UserFridges.Where(uf => uf.UserId == int.Parse(input.UserId));
         }
+        
+        [UseAppDbContext]
+        public IQueryable<UserFridge> GetFridgeMates(QueryFridgemateInput input,[ScopedService] AppDbContext context)
+        {
+            return context.UserFridges.Where(uf => uf.FridgeId == int.Parse(input.FridgeID));
+
+        }
     }
+
+
+
 }
