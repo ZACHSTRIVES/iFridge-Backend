@@ -17,9 +17,9 @@ namespace iFridge_Backend.GraphQL.Fridges
         }
 
         [UseAppDbContext]
-        public Fridge GetFridge(int id, [ScopedService] AppDbContext context)
+        public Fridge GetFridge(QueryFridgeInput input, [ScopedService] AppDbContext context)
         {
-            return context.Fridges.Find(id);
+            return context.Fridges.Find(int.Parse(input.FridgeId));
         }
     }
 }
