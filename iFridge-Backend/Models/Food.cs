@@ -10,6 +10,9 @@ namespace iFridge_Backend.Models
         public int Id { get; set; }
 
         [Required]
+        public string Name { get; set; }
+
+        [Required]
         public int FridgeID { get; set; }
  
         public Fridge? Fridge { get; set; }

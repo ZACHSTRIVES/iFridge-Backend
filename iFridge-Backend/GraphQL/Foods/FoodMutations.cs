@@ -19,6 +19,7 @@ namespace iFridge_Backend.GraphQL.Foods
             var food = new Food
             {
                 FridgeID = int.Parse(input.FridgeID),
+                Name =  input.Name,
                 OriginQTY = int.Parse(input.OriginQTY),
                 CurrentQTY = int.Parse(input.CurrentQTY),
                 Notes = input.Notes,
@@ -39,7 +40,7 @@ namespace iFridge_Backend.GraphQL.Foods
             [ScopedService] AppDbContext context, CancellationToken cancellationToken)
         {
             var food = await context.Foods.FindAsync(int.Parse(input.FoodID));
-
+            food.Name = input.Name ?? food.Name;
             food.OriginQTY = int.Parse(input.OriginQTY ?? food.OriginQTY.ToString());
             food.CurrentQTY = int.Parse(input.CurrentQTY ?? food.CurrentQTY.ToString());
             food.Type = input.Type ?? food.Type;
