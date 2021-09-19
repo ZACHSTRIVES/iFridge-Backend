@@ -47,7 +47,7 @@ namespace iFridge_Backend.GraphQL.Users
             public async Task<IEnumerable<Food>> GetFoods(Fridge fridge, [ScopedService] AppDbContext context,
                 CancellationToken cancellationToken)
             {
-                return await context.Foods.Where(f => f.FridgeID == fridge.Id).ToArrayAsync(cancellationToken);
+                return await context.Foods.Where(f => f.FridgeID == fridge.Id).OrderBy(c => c.ExpireDate).ToArrayAsync(cancellationToken);
             }
 
 

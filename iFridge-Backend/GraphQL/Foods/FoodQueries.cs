@@ -13,7 +13,7 @@ namespace iFridge_Backend.GraphQL.Foods
         [UseAppDbContext]
         public IQueryable<Food> GetFoods([ScopedService] AppDbContext context)
         {
-            return context.Foods.OrderBy(c => c.Created);
+            return context.Foods.OrderBy(c => c.ExpireDate);
         }
 
         [UseAppDbContext]
