@@ -5,8 +5,8 @@ namespace iFridge_Backend.GraphQL.Foods
     public record EditFoodInput
     (
         String FoodID,
-        String Name,
-        String FridgeID,
+        String? Name,
+        String? FridgeID,
         String? OriginQTY,
         String? CurrentQTY,
         String? Type,
