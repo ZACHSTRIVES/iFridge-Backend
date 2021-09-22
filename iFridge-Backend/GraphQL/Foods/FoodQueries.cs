@@ -17,9 +17,9 @@ namespace iFridge_Backend.GraphQL.Foods
         }
 
         [UseAppDbContext]
-        public Food GetFood(int id, [ScopedService] AppDbContext context)
+        public Food GetFood(QueryFoodInput input, [ScopedService] AppDbContext context)
         {
-            return context.Foods.Find(id);
+            return context.Foods.Find(int.Parse(input.FoodId));
         }
     }
 }
