@@ -53,5 +53,19 @@ namespace iFridge_Backend.GraphQL.Foods
             return food;
         }
 
+
+        [UseAppDbContext]
+        public async Task<Food> DeleteFoodAsync(QueryFoodInput input,
+           [ScopedService] AppDbContext context, CancellationToken cancellationToken)
+        {
+            var food= await context.Foods.FindAsync(int.Parse(input.FoodId));
+
+            context.Remove(food);
+            context.SaveChanges();
+
+            return food;
+
+        }
+
     }
 }
